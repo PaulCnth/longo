@@ -4,11 +4,12 @@ from django.db import models
 
 # Create your models here.
 
+
 class Article(models.Model):
     """
     Article model
     """
-    title = models.CharField(max_length=100)
+    title = models.CharField(max_length=90)
     pub_date = models.DateTimeField(auto_now_add=True)
     url = models.URLField()
     context = models.TextField(max_length=300)

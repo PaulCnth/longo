@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'lbgo',
+    'lbgo.apps.LbgoConfig',
 ]
 
 MIDDLEWARE = [
@@ -55,7 +55,7 @@ ROOT_URLCONF = 'longo.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR + '/templates/'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -126,3 +126,6 @@ MEDIA_ROOT = u'/home/kalimodo/longo/media'
 MEDIA_URL = '/media/'
 STATIC_ROOT = u'/home/kalimodo/longo/static'
 STATIC_URL = '/static/'
+#STATICFILES_DIRS = (
+#    BASE_DIR + '/static/',
+#)

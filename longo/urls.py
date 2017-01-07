@@ -15,9 +15,11 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
-from lbgo import views
+from lbgo.views import Index, AddArticle, HashTagCloud
+admin.autodiscover()
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^$', views.index, name='default'),
+    url(r'^$', Index.as_view(), name='Main'),  # main page diplay title + url ,order by pub_date descendent
+    url(r'^post/', AddArticle.as_view(), name='Commit'), # commit new article
 ]
