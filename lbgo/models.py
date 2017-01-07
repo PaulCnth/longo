@@ -15,6 +15,9 @@ class Article(models.Model):
     context = models.TextField(max_length=300)
     is_active = models.BooleanField(default=True)
 
+    def __unicode__(self):
+        return self.title
+
 
 class HashTag(models.Model):
     """

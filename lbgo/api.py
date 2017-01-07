@@ -16,12 +16,13 @@ class Spider():
 
         headers = {'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.6) Gecko/20091201 Firefox/3.5.6'}
         http = urllib3.PoolManager()
-        req = http.request(url=url, headers=headers)
+        req = http.request(method='get', url=url, headers=headers)
         c = req.data
         s = BS(c)
 
         # title
-        title = ''.join(str(s.html.head.title.string).split())
+        # title = ''.join(str(s.html.head.title.string).split())
+        title = s.html.title.string
 
         # abstract, fetch the longest item
         length = [len(x.getText()) for x in s('p')]

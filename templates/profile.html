@@ -23,8 +23,8 @@
         <div class="col-md-12 column">
             {% for article in articles %}
             <div class="well">
-                <span>{{ article.title }}</span>
-                <a>{{ article.url }}</a>
+                <h3 class="text-info">{{ article.title }}</h3>
+                <a href="{{ article.url }}">{{ article.url }}</a>
             </div>
             {% endfor %}
         </div>

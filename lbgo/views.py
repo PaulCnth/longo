@@ -11,7 +11,7 @@ from api import Spider
 class Index(View):
     def get(self, request):
         articles = Article.objects.order_by("-pub_date")
-        return render(request, 'profile.html', {'articles': articles})
+        return render(request, 'main.html', {'articles': articles})
 
     def post(self, request):
         return HttpResponse('Hi, <b>kalimodo</b>, welcome you here!!!')
@@ -19,8 +19,17 @@ class Index(View):
 
 class AddArticle(View):
     """
-    Tweet Post form available on page /add/ URL
+    Tweet Post form available on page /post/ URL
     """
+    def get(self, request):
+        params = dict()
+        articles = Article.objects.all()
+
+        # form widgets
+        form = ArticleForm()
+        params["form"] = form
+
+        return render(request, 'post.html', params)
 
     def post(self, request):
         form = ArticleForm(request.POST)
@@ -33,6 +42,17 @@ class AddArticle(View):
             # save into  article
             art = Article(url=form.cleaned_data['url'], title=data['title'], context=data['tips'])
             art.save()
+
+            # save into tag, multiple items
+            tags = form.cleaned_data['tag']
+            tag = tags.split(',')
+            while '' in tag:
+                tag.remove('') # delete null
+            if len(tag) == 0:
+                tag = ['python'] # default
+            for t in tag:
+                hashtag, created = HashTag.objects.get_or_create(name=t)
+                hashtag.article.add(art)
 
             # save into hashtag
             words = form.cleaned_data['tag'].split(",")
