@@ -19,6 +19,7 @@ from lbgo.views import Index, AddArticle, HashTagCloud
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^$', Index.as_view(), name='Main'),
     url(r'^index/$', Index.as_view(), name='Main'),  # main page diplay title + url ,order by pub_date descendent
     url(r'^post/', AddArticle.as_view(), name='Commit'), # commit new article
 ]
