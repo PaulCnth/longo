@@ -36,11 +36,13 @@ class AddArticle(View):
         if form.is_valid():
 
             # get web abstract
-            spid = Spider()
-            data = spid.get_content(form.cleaned_data['url'])
+            # spid = Spider()
+            # data = spid.get_content(form.cleaned_data['url'])
 
             # save into  article
-            art = Article(url=form.cleaned_data['url'], title=data['title'], context=data['tips'])
+            art = Article(url=form.cleaned_data['url'],
+                          title=form.cleaned_data['title'],
+                          context=form.cleaned_data['content'])
             art.save()
 
             # save into tag, multiple items
